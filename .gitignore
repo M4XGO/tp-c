@@ -1,1 +1,21 @@
-main
+# Fichiers objets
+*.o
+*.obj
+
+# Fichiers binaires
+*.out
+*.exe
+a.out
+
+# Fichiers de dépendances
+*.d
+
+# Bibliothèques
+*.so
+*.dylib
+*.dll
+
+# Dossiers de compilation
+build/
+Debug/
+Release/
