@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Mettre à jour le système et installer les outils essentiels
 RUN apt-get update && apt-get install -y \
     build-essential \
+    wget \
     gcc \
     g++ \
     gdb \
@@ -27,6 +28,8 @@ RUN apt-get update && apt-get install -y \
     g++-multilib \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget -q https://raw.githubusercontent.com/bata24/gef/dev/install.sh -O- | sed -e 's/pip3 install/pip3 install --break-system-packages/g' | sh
 
 WORKDIR /app
 
