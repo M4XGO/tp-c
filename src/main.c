@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include <stdlib.h>
 #define PSEUDO_LENGTH 30
 #define MAX_USERS 10
 
@@ -13,7 +13,7 @@
 //      bool is_admin
 //tableaux -> de structures
 //des fonctions -> X
-// -> créer un user(struct user)
+// -> créer un user(la struct user)
 //    -> remplir tout les champs pour créer un user
 // -> afficher tous les users((pointer)*struct user) -> X
 //    -> afficher le contenu du l'addresse mémoir de la structure user
@@ -25,7 +25,7 @@
 //   -> return le tableau des users modifié
 
 struct user {
-  int ID;
+  int id;
   char pseudo[PSEUDO_LENGTH];
   bool is_admin;
 };
@@ -38,13 +38,20 @@ enum user_field {
   IS_ADMIN
 };
 
-bool create_user(struct user *user) {
-  //
+bool create_user(struct user *user, int id, char *pseudo, bool is_admin) {
+  user -> id = id;
+  strcpy(user -> pseudo, pseudo);
+  user -> is_admin = is_admin;
+
   return true;
 }
 
-void display_users(struct user *users) {
-  printf("Structure user: %p\n", users);
+void display_user(struct user *users) {
+  printf("========================================\n");
+  printf("ID: %d\n", users -> id);
+  printf("Pseudo: %s\n", users -> pseudo);
+  printf("Is admin: %d\n", users -> is_admin);
+  printf("========================================\n");
 }
 
 void display_all_users(struct user *users) {
@@ -63,7 +70,21 @@ struct user *modify_user(struct user *users, int id, enum user_field field, void
 }
 
 int main() {
+  struct user *user1 = malloc(sizeof(struct user));
+  create_user(user1, 1, "Bob l eponge", false);
+  display_user(user1);
 
+  struct user *user2 = malloc(sizeof(struct user));
+  create_user(user2, 2, "Patrick l etoile", false);
+  display_user(user2);
+  
+  struct user *user3 = malloc(sizeof(struct user));
+  create_user(user3, 3, "Capitaine krabs", true);
+  display_user(user3);
+  
+  free(user1);
+  free(user2);
+  free(user3);
   return 0;
 }
 
