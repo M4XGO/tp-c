@@ -27,3 +27,8 @@
     - return -1 if false
   - modifier un user(le tableau des users, un id, un entier pour définir le champ à modifier(enum), la nouvelle valeur)
     - return le tableau des users modifié
+
+
+## TODO -> 
+- [ ] Remplir le README.md
+- [ ] Finir les fonctions
