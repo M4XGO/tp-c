@@ -47,16 +47,16 @@ bool create_user(struct user *user, int id, char *pseudo, bool is_admin) {
 }
 
 void display_user(struct user *users) {
-  printf("========================================\n");
   printf("ID: %d\n", users -> id);
   printf("Pseudo: %s\n", users -> pseudo);
   printf("Is admin: %d\n", users -> is_admin);
-  printf("========================================\n");
 }
 
 void display_all_users(struct user *users) {
-  printf("All users:\n");
-  // tout les users mais que les pseudos
+  for (int i = 0; users[i].id != -1; i++) {
+    display_user(&users[i]);
+  }
+
 }
 
 int search_user_by_id(struct user *users, int id) {
@@ -72,15 +72,30 @@ struct user *modify_user(struct user *users, int id, enum user_field field, void
 int main() {
   struct user *user1 = malloc(sizeof(struct user));
   create_user(user1, 1, "Bob l eponge", false);
-  display_user(user1);
 
   struct user *user2 = malloc(sizeof(struct user));
   create_user(user2, 2, "Patrick l etoile", false);
-  display_user(user2);
   
   struct user *user3 = malloc(sizeof(struct user));
   create_user(user3, 3, "Capitaine krabs", true);
-  display_user(user3);
+
+  printf("============== display all users ==============\n");
+
+  users[0] = *user1;
+  users[1] = *user2;
+  users[2] = *user3;
+  users[3].id = -1;  // Marque la fin du tableau
+
+  display_all_users(users);
+  printf("============== end display all users ==============\n");
+
+  for (int i = 0; users[i].id != -1; i++) {
+    if (users[i].is_admin == true) {
+      printf("============== display admin ==============\n");
+      display_user(&users[i]);
+      printf("============== end display admin ==============\n");
+    }
+  }
   
   free(user1);
   free(user2);
